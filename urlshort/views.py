@@ -19,7 +19,7 @@ def generate_url(request):
     alias_exists=URL.objects.filter(alias=alias).exists() if alias else False
     #si el alias existe en mi base de datos mostrara un error
     if alias_exists:
-        error="This alias already , plexistsease write a different one."
+        error="This alias already , please  write a different one."
         return render (request,'landingPage.html',{'error':error,'long_url':long_url})
     elif len(alias) > 12:
         alias_largo="This alias is too long, please write a shorter alias."
@@ -31,7 +31,7 @@ def generate_url(request):
        short_url=(alias or ''.join(random.choice(character) for i in range(8)))
        #creo un obj en mi bd y se guardara esa url
        obj=URL.objects.create(long_url=long_url,short_url=short_url,alias=alias)
-       short_url="http://127.0.0.1:8000/" + short_url
+       short_url="https://django-urlshortener-6.onrender.com/" + short_url
        mensaje="Your URL"
        return render(request,'landingPage.html',{'short_url':short_url,'mensaje':mensaje})
   return render(request,'landingPage.html')
